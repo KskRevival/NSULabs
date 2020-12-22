@@ -178,4 +178,3 @@ char toLower(char charNum) {
 
     return charNum;
 }
-
