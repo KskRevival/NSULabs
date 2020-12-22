@@ -1,3 +1,4 @@
+```
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -178,3 +179,4 @@ char toLower(char charNum) {
 
     return charNum;
 }
+```
