@@ -11,8 +11,8 @@ void getTemplateHash(unsigned char* buffer, unsigned char* template, int templat
 void compare(unsigned char* buffer, unsigned char* template, int templateLength, int ptr, int shift);
 
 int main(){
-    unsigned char* template = calloc(TEMPLATE_SIZE + 1, sizeof(char));
-    unsigned char* buffer = calloc(BUFF_SIZE, sizeof(char));
+    unsigned char* template = calloc((TEMPLATE_SIZE + 1), sizeof(char));
+    unsigned char* buffer = malloc(BUFF_SIZE * sizeof(char));
     FILE* file = fopen("in.txt", "r");
     int templateLength = 0, threeMax = 1, currHash = 0, templateHash = 0, ptr = 0, shift = 0;
     char* checker;
@@ -36,7 +36,7 @@ int main(){
             compare(buffer, template, templateLength, ptr, shift);
         }
         currHash = (currHash / 3) + threeMax*(buffer[ptr] % 3);
-        if(ptr == BUFF_SIZE){
+        if(ptr + 1 == BUFF_SIZE){
             bufLen = updateBuffer(file, buffer);
             ptr = 0;
             shift += BUFF_SIZE;
@@ -45,20 +45,19 @@ int main(){
         ptr++;
     }
 
-    fclose(file);
-    free(template); free(buffer);
+    fclose(file); free(template); free(buffer);
     return 0;
 }
 
 void compare(unsigned char* buffer, unsigned char* template, int templateLength, int ptr, int shift){
-    int i = templateLength;
-    while (i > 0){
-        i--;
-        printf("%d ", ptr + shift - i);
-        if (template[templateLength - i - 1] != buffer[ptr - i - 1]){
-            return;
-        }
-    }
+     int i = templateLength;
+     while (i > 0){
+         i--;
+         printf("%d ", ptr + shift - i);
+         if (template[templateLength - i - 1] != buffer[ptr - i - 1]){
+             break;
+         }
+     }
 }
 
 void getTemplateHash(unsigned char* buffer, unsigned char* template, int templateLength, int* threeMax, int* templateHash, int* currHash){
