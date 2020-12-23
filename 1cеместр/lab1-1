@@ -6,9 +6,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int updateBuffer(FILE* file, unsigned char* buffer);
-void getTemplateHash(unsigned char* buffer, unsigned char* template, int templateLength, int* threeMax, int* templateHash, int* currHash);
-void compare(unsigned char* buffer, unsigned char* template, int templateLength, int ptr, int shift);
+int updateBuffer(FILE* file, unsigned char* buffer);//перезаписывает буффер
+void getTemplateHash(unsigned char* buffer, unsigned char* template, int templateLength, int* threeMax, int* templateHash, int* currHash);//Считает Хэш шаблона и первых
+//templateLength элементов буффера
+void compare(unsigned char* buffer, unsigned char* template, int templateLength, int ptr, int shift);//сравнивает шаблон с частью строки, если совпали хэши
 
 int main(){
     unsigned char* template = calloc((TEMPLATE_SIZE + 1), sizeof(char));
