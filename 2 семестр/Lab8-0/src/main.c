@@ -46,20 +46,6 @@ short prim(short n, Heap* h, unsigned** matrix){
     decreaseKey(h, 1, 0); d[1] = 0;
     short v = extractMin(h);
     while(h->size){
-        /*while(adj[v]->size){
-            short u = adj[v]->v->num;
-            if (!visited[u] && matrix[v][u] < d[u]){
-                d[u] = matrix[v][u];
-                p[u] = v;
-                decreaseKey(h, u, (int)d[u]);
-            }
-            adj[v]->size--;
-            ListItem* tmp = adj[v]->v;
-            if (adj[v]->size)
-                adj[v]->v = adj[v]->v->prev;
-            free(tmp);
-
-        }*/
         for (int i = 1; i < n+1; ++i) {
             if(!visited[i] && matrix[v][i] != INF && matrix[v][i] < d[i]){
                 d[i] = matrix[v][i];
